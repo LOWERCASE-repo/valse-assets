@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 public class NavNode {
 
+// nav map?
+
   public Vector2 pos;
-  public NavNode prev, next;
-  // public HashSet<NavNode> links;
   public Dictionary<NavNode, float> links;
   
   public NavNode(Vector2 pos) {

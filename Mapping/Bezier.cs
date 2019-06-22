@@ -15,7 +15,7 @@ public class Bezier {
   }
   
   public void Rotate(float ang) {
-    for (int i = 1; i < pivots.Length; ++i) {
+    for (int i = 1; i < pivots.Length; i++) {
       pivots[i] = pivots[i] - start;
       pivots[i] = pivots[i].Rotate(ang);
       pivots[i] = pivots[i] + start;

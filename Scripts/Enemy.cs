@@ -30,10 +30,10 @@ public abstract class Enemy : Entity {
     int fives = (int)(Random.value * cScore / 5f);
     int ones = cScore - fives * 5;
 
-    for (int i = 0; i < fives; ++i) {
+    for (int i = 0; i < fives; i++) {
       Pool.Spawn(Identity.HeavyPoint, rb.position);
     }
-    for (int i = 0; i < ones; ++i) {
+    for (int i = 0; i < ones; i++) {
       Pool.Spawn(Identity.Point, rb.position);
     }
     

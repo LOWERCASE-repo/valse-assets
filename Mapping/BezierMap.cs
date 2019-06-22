@@ -27,7 +27,7 @@ public class BezierMap {
     Vector2 mid = (pivots[0] + pivots[pivotCount - 1]) / 2f;
     float radius = length / 2f;
 
-    for (int i = 1; i < pivotCount - 1; ++i) {
+    for (int i = 1; i < pivotCount - 1; i++) {
       pivots[i] = mid + Random.insideUnitCircle * radius;
     }
     pivots.OrderBy(i => i.y);

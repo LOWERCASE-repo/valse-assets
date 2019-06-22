@@ -76,7 +76,7 @@ public class Sound : MonoBehaviour {
 
   private void ApplyEnvelope() {
     Keyframe[] keys = new Keyframe[5];
-    for (int i = 0; i < 5; ++i) {
+    for (int i = 0; i < 5; i++) {
       keys[i] = new Keyframe(i / 4f, 0f);
       keys[i].weightedMode = WeightedMode.Both;
       keys[i].inWeight = 0f;
@@ -93,7 +93,7 @@ public class Sound : MonoBehaviour {
   
   private void ApplyPitches() {
     Keyframe[] keys = new Keyframe[pitches.Length];
-    for (int i = 0; i < pitches.Length; ++i) {
+    for (int i = 0; i < pitches.Length; i++) {
       keys[i] = new Keyframe((float)i / (float)(pitches.Length - 1), pitches[i]);
       keys[i].weightedMode = WeightedMode.None;
     }
@@ -110,7 +110,7 @@ public class Sound : MonoBehaviour {
 
   private int pos = 0;
   private void OnAudioRead(float[] data) {
-    for (int i = 0; i < data.Length; ++i, ++pos) {
+    for (int i = 0; i < data.Length; i++, ++pos) {
       int randPos = pos % sampleRate;
       float totalTime = pos / (duration * sampleRate);
       float cycleTime = (EvalFrequency(pitch.Evaluate(totalTime)) * pos) * rateMod;
@@ -124,7 +124,7 @@ public class Sound : MonoBehaviour {
     pitch = new AnimationCurve();
     rateMod = 1f / sampleRate;
     random = new float[sampleRate];
-    for (int i = 0; i < random.Length; ++i) {
+    for (int i = 0; i < random.Length; i++) {
       random[i] = Random.value * 2f - 1f;
     }
   }
