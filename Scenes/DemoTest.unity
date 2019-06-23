@@ -173,7 +173,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 60
+  orthographic size: 50
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -233,9 +233,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnTime: 2
-  nodeCount: 20
-  fieldSize: 50
+  vertCount: 4
+  fieldSize: 30
   debugNode: {fileID: 4950474785878365975, guid: 1e29444ed6b7d3341a140f6cfbba2a7b,
+    type: 3}
+  debugEdge: {fileID: 4335421506841507389, guid: bf5e62944d03da74fa534e7b4f51b98e,
     type: 3}
 --- !u!4 &678501914
 Transform:
