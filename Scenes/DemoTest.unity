@@ -232,8 +232,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd6257a8ae9b2274393a13e40fc70b12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnTime: 2
-  vertCount: 4
+  spawnTime: 3
+  vertCount: 20
   fieldSize: 30
   debugNode: {fileID: 4950474785878365975, guid: 1e29444ed6b7d3341a140f6cfbba2a7b,
     type: 3}

@@ -4,11 +4,38 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
+/*
+delaunay triangulation subgraphs
+gabriel graph
+urquhart graph
+euclidean minimum spanning tree
+rel neighbor
+nearest neighbor
+*/
+
 public class Triangle {
 
   public Vector2[] verts;
   
-  public bool CircleContains(Vector2 point) {
+  private float Sign (Vector2 p1, Vector2 p2, Vector2 p3) {
+    return (p1.x - p3.x) * (p2.y - p3.y) - (p2.x - p3.x) * (p1.y - p3.y);
+  }
+  
+  public bool Overlap(Vector2 point) {
+    float d1, d2, d3;
+    bool hasNeg, hasPos;
+    
+    d1 = Sign(point, verts[0], verts[1]);
+    d2 = Sign(point, verts[1], verts[2]);
+    d3 = Sign(point, verts[2], verts[0]);
+    
+    hasNeg = (d1 < 0) || (d2 < 0) || (d3 < 0);
+    hasPos = (d1 > 0) || (d2 > 0) || (d3 > 0);
+    
+    return !(hasNeg && hasPos);
+  }
+  
+  public bool OverlapCircle(Vector2 point) {
     Matrix4x4 mat = new Matrix4x4();
     Vector4 row;
     for (int i = 0; i < verts.Length; i++) {
@@ -30,15 +57,17 @@ public class Triangle {
     return (mat.determinant < -Mathf.Epsilon);
   }
   
-  private void SortVerts() { // flc, mat this shit
-    float det = (verts[1].y - verts[0].y) * (verts[2].x - verts[1].x)
-              - (verts[1].x - verts[0].x) * (verts[2].y - verts[1].y);
-    if (det > 0) {
-      Vector2 swap = verts[0];
-      verts[0] = verts[1];
-      verts[1] = swap;
-      Debug.Log("sanotehusnotah");
-    }
+  private Vector2 center;
+  private int CompareClockwise(Vector2 a, Vector2 b) {
+    if (a.x - center.x >= 0f && b.x - center.x < 0f)
+        return -1;
+    if (a.x - center.x < 0f && b.x - center.x >= 0f)
+        return 1;
+    Debug.Log("clock");
+    Debug.Log(a);
+    Debug.Log(b);
+    Debug.Log((a.x - center.x) * (b.y - center.y) - (b.x - center.x) * (a.y - center.y));
+    return (int)((a.x - center.x) * (b.y - center.y) - (b.x - center.x) * (a.y - center.y));
   }
   
   public override bool Equals(System.Object obj) {
@@ -52,6 +81,11 @@ public class Triangle {
   
   public Triangle(Vector2 vert1, Vector2 vert2, Vector2 vert3) {
     this.verts = new Vector2[] { vert1, vert2, vert3 };
-    SortVerts();
+    center = Vector2.zero;
+    foreach (Vector2 vert in verts) {
+      center += vert;
+    }
+    center /= verts.Length;
+    Array.Sort(verts, CompareClockwise);
   }
 }
